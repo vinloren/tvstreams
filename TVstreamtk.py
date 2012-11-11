@@ -230,8 +230,6 @@ def CalculateDate(curDate, DatePos, sDate):
 
 #LA7 TV Videos
 def VIDEOLINKS(url):
-        #getDate = xbmcplugin.getSetting(int( sys.argv[ 1 ] ),"display_date")
-        #getQuality = "xbmcplugin.getSetting(int( sys.argv[ 1 ] ),"vid_quality")
         getQuality = '1'
         req = request.Request("http://www.la7.tv/xml/epg/index.xml")
         req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14')
