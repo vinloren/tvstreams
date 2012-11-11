@@ -43,9 +43,6 @@ def CATEGORY():
         link=link.replace('\t','').replace('\r\n','').replace('\n','').replace('" />','"/>')
         match=re.compile('<show channel="(.+?)" title="(.+?)" linkUrl="(.+?)<logo src="(.+?)"/>').findall(link)
         for buffer1, name,buffer2,thumb in match:
-                #outfile = os.path.join(__settings__.getAddonInfo('path'),'resources','images',thumb.split('/')[-1])
-                #if not os.path.isfile(outfile):
-                #        urlretrieve(thumb, outfile)
                 addDir(name.upper(),name,1)
 
 def findDirettaLink2(name):
