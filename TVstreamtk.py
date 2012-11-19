@@ -119,8 +119,8 @@ def PLAY(url,name):
         else:
                 mmsurl=mms(url,agent)
         try:
-            print ("Playing "+mmsurl)
-            system("%s %s" % (player, mmsurl))
+            mmsurl = mmsurl.replace('mms:','mmsh:')
+            system("lxterminal -e %s %s" % (player, mmsurl+' < /dev/stdin'))
         except:
             pass
         
@@ -243,8 +243,8 @@ def VIDEOLINKS(url):
         for datepos,buffer1,thumb,url,buffer2,name in match:
                 name = NormaliseName(name,getDate) + CalculateDate(epgDate[0],datepos,getDate)
                 url = SetVideoQuality(url,getQuality)
-                print (name,"rtmp://yalpvod.alice.cdn.interbusiness.it:1935/vod"+url) #+","+thumb)
-                system("%s %s" % (player, "rtmp://yalpvod.alice.cdn.interbusiness.it:1935/vod"+url))
+                print (name,"rtmp://yalpvod.alice.cdn.interbusiness.it:1935/vod"+url)
+                system("lxterminal -e %s %s" % (player, "rtmp://yalpvod.alice.cdn.interbusiness.it:1935/vod"+url+' < /dev/stdin'))
                 break
 
 
@@ -415,12 +415,12 @@ class TVstream(Frame):
                                             #url += " -p "+path.text+" "
                                             for adv in elem.iterfind('advanced'):
                                                 try:
-                                                    url += " -y "+path.text+" "+adv.text + " -o /var/log/mystdin & "+player +' /var/log/mystdin </dev/stdin'
+                                                    url += " -y "+path.text+" "+adv.text + " -o /var/log/mystdin && "+player +' /var/log/mystdin < /dev/stdin'
                                                 except:
-                                                    url += " -y "+path.text+" -o /var/log/mystdin & "+player +' /var/log/mystdin </dev/stdin'
+                                                    url += " -y "+path.text+" -o /var/log/mystdin && "+player +' /var/log/mystdin < /dev/stdin'
                     				
             area.insert(END,"Playing "+url+'\n')
-            system("%s %s" % ("rtmpdump --live -v -r ", url))
+            system("%s %s" % ("lxterminal -e rtmpdump --live -v -r ", url))
         
     
 def main():
